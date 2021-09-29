@@ -1,7 +1,7 @@
 # Andrey Starenky
 # Assign 1
-# September 28, 2021
 # CS1026A
+# September 28, 2021
 
 # Constant Prices
 OFF_PEAK_PRICE = 0.085

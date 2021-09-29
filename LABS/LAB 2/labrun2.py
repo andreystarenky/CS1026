@@ -1,3 +1,8 @@
+# Andrey Starenky
+# Lab 2
+# CS1026A
+# September 29, 2021
+
 '''
 clientAge = float(input("Please enter your age in years: "))
 if(clientAge>=9):
