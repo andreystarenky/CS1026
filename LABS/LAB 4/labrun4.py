@@ -1,4 +1,3 @@
-
 # ACTIVITY
 def factorial(n):
     result = n
@@ -8,6 +7,7 @@ def factorial(n):
 
 print(factorial(5))
 
+# LAB
 def countVowels(word):
     numVowels = 0            # First error numVowels should be 0
     for letter in word:      # Second error string instead of word
@@ -16,3 +16,7 @@ def countVowels(word):
     return numVowels         # Fourth error returns letter (not defined) instead of the number of vowels
 
 print(countVowels("AEIOu"))
+print(countVowels("PPPPPPP"))
+print(countVowels("PPPAAPPP"))
+print(countVowels("APPPPPPP"))
+print(countVowels("PPPPPPPA"))
