@@ -1,7 +1,7 @@
 # Andrey Starenky
 # Assign 1
 # CS1026A
-# September 28, 2021
+# October 06, 2021
 
 # Constant Prices
 OFF_PEAK_PRICE = 0.085
@@ -30,23 +30,25 @@ while True: # loop forever until break; is called
     # Get is senior input
     isSeniorInput = input("Is owner senior? (Y,y,N,n): ")
 
+    # total kwh
+    totalKwh = offPeakInput + onPeakInput + midPeakInput
+
     # Calculate Prices Prior to Discounts
     offPeakCost = offPeakInput * OFF_PEAK_PRICE
     onPeakCost = onPeakInput * ON_PEAK_PRICE
     midPeakCost = midPeakInput * MID_PEAK_PRICE
 
     # Calculate Discounts
-    # Total Usage Discount
-
 
     # On Peak Discount
-    if onPeakInput<150 and offPeakInput<400:
+    if onPeakInput<150 and totalKwh>=400:
         onPeakCost *= (1-ON_PEAK_DISCOUNT)
 
     # Total Cost
     totalCost = offPeakCost + onPeakCost + midPeakCost
 
-    if offPeakInput+onPeakInput+midPeakInput<400:
+    # Total Discount
+    if totalKwh<400:
         totalCost *= (1-TOTAL_USAGE_DISCOUNT)
 
     # Senior Discount
