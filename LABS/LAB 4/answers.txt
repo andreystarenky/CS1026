@@ -1,0 +1,9 @@
+D
+G
+B
+1. False
+2. 21
+3. True
+4. -1
+5. False
+6. 0

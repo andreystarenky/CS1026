@@ -23,7 +23,7 @@ if userScore >= IDEAL_CREDIT_SCORE: # switched => to >=
     downPayment = 0.1 * housePrice
 elif userScore < IDEAL_CREDIT_SCORE and userScore >= 600: # switched else if to elif, and "600" to 600
     downPayment = 0.2 * housePrice
- userScore < 600:
+elif userScore < 600:
     downPayment = 0.3 * housePrice # was not indented
 
 print("Your down payment is: ${}".format(downPayment))
