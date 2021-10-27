@@ -12,7 +12,7 @@ def checkBasic(checkString):
 def checkPosition(checkString):
     sum = 0 # Default sum is 0
     for x in range(0,len(checkString)-1):  # Loop through string EXCEPT last character
-        sum += (int(checkString[x]) * (x+1)) # Add the digit * position to the sum
+        sum += (int(checkString[x]) * (x + 1)) # Add the digit * position to the sum
     checkDigit = sum % 10 # Get mod 10
     if checkDigit == int(checkString[len(checkString) - 1]):
         return True # Return True if the check digit matches the given input
@@ -22,7 +22,7 @@ def checkPosition(checkString):
 def checkUPC(checkString):
     sum = 0 # Default sum is 0
     for x in range(0, len(checkString) - 1):  # Loop through string EXCEPT last character
-        if (x+1)%2 == 1: # Check if odd position
+        if (x + 1) % 2 == 1: # Check if odd position
             sum += (int(checkString[x]) * 3) # Add digit multiplied by 3 to sum
         else: # Else even position
             sum += int(checkString[x]) # Add digit to sum

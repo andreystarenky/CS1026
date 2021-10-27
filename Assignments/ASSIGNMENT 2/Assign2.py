@@ -33,13 +33,13 @@ while True:
         none = False # None is false, as one code matched
 
     # Check for position code
-    if code_check.checkPosition(userInput) == True:
+    if code_check.checkPosition(userInput):
         positionList.append(userInput) # Add to list
         print("-- code: " + userInput + " valid Position code.")
         none = False # None is false, as one code matched
 
     # Check for UPC code
-    if code_check.checkUPC(userInput) == True:
+    if code_check.checkUPC(userInput):
         upcList.append(userInput) # Add to list
         print("-- code: " + userInput + " valid UPC code.")
         none = False # None is false, as one code matched
@@ -56,21 +56,22 @@ print("Basic: ", end = "")
 # Print out each code
 for x in range(0,len(basicList)):
     # IF LAST ITEM, DON'T PRINT COMMA
-    if (x == len(basicList)-1):
+    if (x == len(basicList) - 1):
         print(basicList[x], end="")
     else: # ELSE PRINT COMMA
         print(basicList[x], end=", ")
 # If no codes, print none
 if(len(basicList) == 0):
     print("None")
-else: print()
+else:
+    print()
 
 # Position Codes
 print("Position: ", end = "")
 # Print out each code
 for x in range(0,len(positionList)):
     # IF LAST ITEM, DON'T PRINT COMMA
-    if (x == len(positionList)-1):
+    if (x == len(positionList) - 1):
         print(positionList[x], end="")
     else: # ELSE PRINT COMMA
         print(positionList[x], end=", ")
@@ -90,12 +91,17 @@ for x in range(0,len(upcList)):
 # If no codes, print none
 if(len(upcList) == 0):
     print("None")
-else: print()
+else:
+    print()
 
 # None Codes
 print("None: ", end = "")
-for x in noneList:
-    print(x, end=" ")
+for x in range(0,len(noneList)):
+    # IF LAST ITEM, DON'T PRINT COMMA
+    if (x == len(noneList) - 1):
+        print(noneList[x], end="")
+    else:  # ELSE PRINT COMMA
+        print(noneList[x], end=", ")
 # If no codes, print none
 if(len(noneList) == 0):
     print("None")
