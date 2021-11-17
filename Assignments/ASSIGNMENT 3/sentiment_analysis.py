@@ -32,14 +32,17 @@ def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
     CENTRAL_EDGE = -87.518395
     EASTERN_EDGE = -67.444574
 
+    # Order of the regions
+    regionsListOrder = ['Eastern', 'Central', 'Mountain', 'Pacific']
+
     # create a nested dict to store the data for each region
     # each region dict will have its own dict with totalScore, numTweets, and numKeyTweets values
     # ** please note the totalScore is stored instead of avg so avg can be calculated after the loop
 
-    regionsData = {'Pacific': {}, 'Mountain': {}, 'Central': {}, 'Eastern': {}}
+    regionsData = {}
 
     # give each region it's own dict holding the num of tweets and key tweets, and total for average in the end
-    for region in regionsData: # this is to save redundancy with copy paste
+    for region in regionsListOrder: # this is to save redundancy with copy paste
         regionsData[region] = {'numTweets': 0, 'numKeyTweets': 0, 'totalScore': 0}
 
     # Loop through all lines in the file, all tweets
@@ -77,8 +80,6 @@ def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
         else:
             regionsData[region]['avg'] = 0
 
-    # Order of the regions for the tuple
-    regionsListOrder = ['Eastern', 'Central', 'Mountain', 'Pacific']
     resultsList = []
 
     # create a tuple for each region and add it to the list to return
