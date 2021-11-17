@@ -14,6 +14,9 @@ def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
     except FileNotFoundError as e: # Except the error if file is not found
         print(e)
         return [] # Return blank array, files do not need to be closed since they were not found
+    
+    !!! WHAT IF the first file exists and the second one doesn't? you'd need to close the first one, 
+    so your options are either try/except them individually or do another try/except for closing in this except section
 
     keys = {}  # create dictionary for keywords and their values
 
