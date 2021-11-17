@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f1369b7-c558-47cb-9223-aa28fb457030" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/empty.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/driver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/key1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/key2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/keywords.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/myDriver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/sentiment_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/tweets.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/tweets1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/m_test/tweets2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/notes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/sentiment_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CS1026.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CS1026.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/sentiment_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assignments/ASSIGNMENT 3/sentiment_analysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

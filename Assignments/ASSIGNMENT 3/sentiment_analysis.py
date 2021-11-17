@@ -43,7 +43,7 @@ def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
 
     # give each region it's own dict holding the num of tweets and key tweets, and total for average in the end
     for region in regionsListOrder: # this is to save redundancy with copy paste
-        regionsData[region] = {'numTweets': 0, 'numKeyTweets': 0, 'totalScore': 0}
+        regionsData[region] = {'numTweets': 0, 'numKeyTweets': 0, 'totalScore': 0, 'avg':0}
 
     # Loop through all lines in the file, all tweets
     for line in tweetsFile:
@@ -54,7 +54,7 @@ def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
         long = float(lineList[1].replace(']', ''))
 
         # check that the tweet is within the main boundary
-        if not (long < START_EDGE or long > EASTERN_EDGE or lat > TOP or lat < BOTTOM):
+        if long > START_EDGE and long < EASTERN_EDGE and lat < TOP and lat > BOTTOM:
             # tweet is in boundaries --> get sentiment score
             # sublist for the tweet as it always starts with the 5th list item
             # this is done in the case that any keyword in the future might contain or be numbers
@@ -77,8 +77,6 @@ def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
     for region in regionsData: # calculate avg for each
         if regionsData[region]['numKeyTweets'] > 0: # Avoid division by 0 if no values
             regionsData[region]['avg'] = regionsData[region]['totalScore'] / regionsData[region]['numKeyTweets']
-        else:
-            regionsData[region]['avg'] = 0
 
     resultsList = []
 
