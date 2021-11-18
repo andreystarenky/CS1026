@@ -1,0 +1,88 @@
+objective: determine which timezone is the happiest
+
+- analyze each tweet to determine a happiness score FOR THE INDIVIDUAL TWEET
+- score is found by looking for given keywords and totalling the sentiment values (each val is 1-10)
+
+- seperate tweet into words based on white space (blank, tab, end of line, punctuation)
+- REMOVE PUNCTUATION from beginning or end of word, do not worry about within
+  - #lonely becomes lonely and happy!! becomes happy but not-happy stays not-happy
+- convert to lowercase -> this is your word
+- if the word is matched to any sentiment keys, you add the sentiment score to total
+- ONLY EXACT MATCHES ex. if tweet has hats but key is hat do not include
+- tweets with at least 1 key is a keyword tweet
+- for each region count the total number of tweets in the region and number of keyword tweets
+- happiness score for timezone is the sum of happiness scores for all the keyword tweets in the region
+  divided by the number of KEYWORD TWEETS
+
+- file called tweets.txt contains the tweets (one per line)
+  [lat, long] value date time text
+
+  - lat long are used for position
+  - value is not used
+  - date is  not used
+  - time is not used
+  - text is the text you use
+
+- file called keywords.txt contains sentiment keys and their scores, one per line
+  keyword, value
+
+ - keyword is word to look for
+ - value is the sentiment value (1-10)
+
+LOCATIONS:
+(if tweet is outside the location, SKIP IT)
+
+PACIFIC
+(49.189787, -125.242264) (49.189787, -115.236428)
+(24.660845, -125.242264) (24.660845, -115.236428)
+
+MOUNTAIN
+(49.189787, -115.236428) (49.189787, -101.998892)
+(24.660845, -115.236428) (24.660845, -101.998892)
+
+CENTRAL
+(49.189787, -101.998892) (49.189787, -87.518395)
+(24.660845, -101.998892) (24.660845, -87.518395)
+
+EASTERN
+(49.189787, -87.518395) (49.189787, -67.444574)
+(24.660845, -87.518395) (24.660845, -67.444574)
+
+sentiment_analysis.py
+- function that performs simple analysis on data
+- compute_tweets(nameOfTweetsFile, nameOfKeysFile)
+  - uses two files to process tweets and output results.
+  - CHECKS THAT BOTH FILES EXIST
+    - if either DNE, program should generate an exception and function should return empty list
+  - store the keys in a data structure of your choice (probably set?) (use CONSTANT naming convention)
+  - process the tweets file, compute happiness score for each tweet and happiness score for each timezone
+  - read line by line and break it up
+  - DO NOT DUPLICATE CODE THAT EXISTS IN PYTHON (use string functions)
+  - IGNORE TWEETS FROM OUTSIDE ZONES
+    - check tweet first, then process
+
+  - return LIST of TUPLES - a tuple for each region
+    - in order, east, cent, mount, pac
+    - each tuple has 3 vals (average, count_of_keyword_tweets, count_of_tweets)
+    - return empty list if exception is raised!
+
+main.py
+- prompt user for name of two files - file containing keys, and then file containing tweets
+- calls compute_tweets() with the two filenames
+- main.py prints the results, (in a readable fashion) NOT OTHER MODULES
+
+driver.py (given) + test files
+- will use sentiment_analysis and compute_tweets
+tweets1.txt, tweets2.txt, key1.txt, key2.txt
+files are small enough to compute by hand
+
+* * * * * CREATE YOUR OWN TEST CASES AND TEST * * * * *
+
+USE: open("fileName.txt","r",encoding="utf-8") or open('fileName.txt', encoding='utf-8', errors='ignore')
+to avoid encoding errors
+
+?? what to do if no tweets in file? vals should be 0?
+
+COMMENTS: EVERY FILE, IDENTIFY YOURSELF, DESCRIBE THE PROGRAM/PROCESS, DESCRIBE KEY PORTIONS OF CODE
+follow conventions
+USE CONSTANTS
