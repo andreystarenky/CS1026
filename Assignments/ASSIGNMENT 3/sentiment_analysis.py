@@ -7,16 +7,25 @@
 # This function will compute and return the avg happiness score, total number of keyword tweets, and
 # total number of tweets by region given the name of a file containing tweets and a file containing keywords
 def compute_tweets(nameOfTweetsFile, nameOfKeysFile):
-    try: # try statement is used in case of the files not existing
+
+    # THE TRY STATEMENTS ARE SPLIT IN 2 BECAUSE THE FIRST FILE MIGHT EXIST BUT NOT THE SECOND
+    # AND IN THIS CASE WE NEED TO CLOSE ONLY THE FIRST FILE
+    # OTHERWISE WE SHOULDN'T CLOSE THE FIRST FILE IF IT DOESN'T EXIST
+
+    try: # try statement is used in case of the tweets file not existing
         tweetsFile = open(nameOfTweetsFile, "r", encoding="utf-8")
+
+    except FileNotFoundError as e: # Except the error if file is not found
+        print("Cannot open tweets file: " + str(e))
+        return [] # Return blank array, tweets file does not need to be closed since they were not found
+
+    try: # try statement is used in case of the keys file not existing
         keysFile = open(nameOfKeysFile, "r", encoding="utf-8")
 
     except FileNotFoundError as e: # Except the error if file is not found
-        print(e)
+        print("Cannot open keywords file file: " + str(e))
+        tweetsFile.close() # CLOSE THE TWEETS FILE but not the keys file since it was not opened
         return [] # Return blank array, files do not need to be closed since they were not found
-    
-    !!! WHAT IF the first file exists and the second one doesn't? you'd need to close the first one, 
-    so your options are either try/except them individually or do another try/except for closing in this except section
 
     keys = {}  # create dictionary for keywords and their values
 
