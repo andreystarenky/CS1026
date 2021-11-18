@@ -1,0 +1,13 @@
+1
+i - c and d
+ii - a
+iii - d
+iv - b and rancor or d without yoda
+
+2 - c
+
+
+SOLVE ERRORS
+1. remove the -1 in the for loop range
+2. change sentence[word
+ ] to sentence[i]
