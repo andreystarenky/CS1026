@@ -18,3 +18,8 @@ cs1026 A4 edge cases
 country does not currently exist
  - with all values
  - with some
+ 
+ 
+ !!!!!!!!
+ Update: France;France;France - should be invalid
+ Spaces everywhere (should all be stripped), e.g. United_ States _ of_America ; P = 1 , 234,56 7; A= 234 ,567 , 890 - should be valid
