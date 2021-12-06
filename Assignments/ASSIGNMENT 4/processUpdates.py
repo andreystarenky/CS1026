@@ -36,6 +36,8 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
 !!! It's a really bad prctice to use a paramenter as a variable (assigning to it)
 !!! Normally you'd create a new variable first thing inside this function like fileName = cntryFileName, and then use this one
 !!! Same for the updateFile
+
+    USE ONE VAR NAME
                 
             else:
                 # Write to output file
@@ -109,8 +111,6 @@ def handleUpdate(update, catlog):
     if update.count(';') > 3:  # Too many semicolons
         return False
     updateArray = update.split(';')  # Remove spaces, and split using ; character
-    
-!!! HOW DOES THIS REMOVE SPACES? Espcically spaces NOT around ; like inside the country name or in the numbers?    
     
 !!! Suggestion: extract these into separate function like parseName(updateArray) that returns (True, Name) or (False, None)
     

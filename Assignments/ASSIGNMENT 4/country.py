@@ -7,14 +7,10 @@ class Country:
     # Constructor with default values
     def __init__(self, name, pop="", area="", continent=""):
         # Define the variables in an instance context
-        self.countryName = name
-
-!!! THESE HAVE TO BE NAMED WITHOUT "country" - just name, population, area, continent. 
-you can do this.name = name, the first one is the instance variable, the second is a paramenter     
-
-        self.countryPopulation = pop
-        self.countryArea = area
-        self.countryContinent = continent
+        self.name = name
+        self.population = pop
+        self.area = area
+        self.continent = continent
 
 
     # Getter methods
@@ -22,13 +18,13 @@ you can do this.name = name, the first one is the instance variable, the second 
         return self.countryName
 
     def getPopulation(self):
-        return self.countryPopulation
+        return self.population
 
     def getArea(self):
-        return self.countryArea
+        return self.area
 
     def getContinent(self):
-        return self.countryContinent
+        return self.continent
 
     # Setter methods
     def setPopulation(self, newPop):
@@ -42,14 +38,5 @@ you can do this.name = name, the first one is the instance variable, the second 
 
     # String representation method
     def __repr__(self):
-        return self.countryName + " (pop: " + self.countryPopulation + ", size: " + self.countryArea + ") in " + self.countryContinent
+        return self.countryName + " (pop: " + self.population + ", size: " + self.area + ") in " + self.continent
 
-    # Override the equals operator for checking if this object is equal to another
-    def __eq__(self, other):
-        if other!= None and self.countryName == other.getName():
-            return True
-        
-!!! WE DISCUSSED THIS - you don't need this. And it is also wrong, as 2 country objects with the same name 
-and different other fields would be considered equal
-
-        return False
