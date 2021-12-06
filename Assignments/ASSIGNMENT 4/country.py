@@ -15,7 +15,7 @@ class Country:
 
     # Getter methods
     def getName(self):
-        return self.countryName
+        return self.name
 
     def getPopulation(self):
         return self.population
@@ -28,15 +28,15 @@ class Country:
 
     # Setter methods
     def setPopulation(self, newPop):
-        self.countryPopulation = newPop
+        self.population = newPop
 
     def setArea(self, newArea):
-        self.countryArea = newArea
+        self.area = newArea
 
     def setContinent(self, newCont):
-        self.countryContinent = newCont
+        self.continent = newCont
 
     # String representation method
     def __repr__(self):
-        return self.countryName + " (pop: " + self.population + ", size: " + self.area + ") in " + self.continent
+        return self.name + " (pop: " + self.population + ", size: " + self.area + ") in " + self.continent
 

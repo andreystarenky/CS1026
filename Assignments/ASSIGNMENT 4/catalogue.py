@@ -21,35 +21,35 @@ class CountryCatalogue:
                                                                                
                 # Create a country object to add to list of countries
                 newCountry = Country(lineArray[0],lineArray[2],lineArray[3],lineArray[1])
-                self.myCountries[lineArray[0]] = newCountry
+                self.countryCat[lineArray[0]] = newCountry
 
 
     # Setter methods
     def setPopulationOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
-        if countryName in self.myCountries:
-            self.myCountries[countryName].setPopulation(newValue)
+        if countryName in self.countryCat:
+            self.countryCat[countryName].setPopulation(newValue)
         else:
             print("Error - country DNE: " + countryName)
 
     def setAreaOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
-        if countryName in self.myCountries:
-            self.myCountries[countryName].setArea(newValue)
+        if countryName in self.countryCat:
+            self.countryCat[countryName].setArea(newValue)
         else:
             print("Error - country DNE: " + countryName)
 
     def setContinentOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
-        if countryName in self.myCountries:
-            self.myCountries[countryName].setContinent(newValue)
+        if countryName in self.countryCat:
+            self.countryCat[countryName].setContinent(newValue)
         else:
             print("Error - country DNE: " + countryName)
 
     # Find country method
     def findCountry(self, countryObject):
-        if countryObject.getName() in self.myCountries:
-            return self.myCountries[countryObject.getName()]
+        if countryObject.getName() in self.countryCat:
+            return self.countryCat[countryObject.getName()]
         return None
 
     # Add country method
@@ -58,20 +58,20 @@ class CountryCatalogue:
         # Check if country already exists
         if self.findCountry(tempCountry) == None:
 
-!!! YOU ARE NOT USING findCountry in setters, but you use directly "if countryName in self.myCountries" so why use it here?
-!!! DO THE SAME: if not countryName in self.myCountries:
-!!!                 self.myCountries[countryName] = Country(countryName, pop, area, cont)
-!!! DO not need tempCountry at all
+            #!!! YOU ARE NOT USING findCountry in setters, but you use directly "if countryName in self.myCountries" so why use it here?
+            #!!! DO THE SAME: if not countryName in self.myCountries:
+            #!!!                 self.myCountries[countryName] = Country(countryName, pop, area, cont)
+            #!!! DO not need tempCountry at all
                                                                                
             # Country is not in our Catalogue yet
-            self.myCountries[countryName] = tempCountry
+            self.countryCat[countryName] = tempCountry
             return True
         return False
 
     # Method to print the Country Catalogue
     def printCountryCatalogue(self):
-        for country in self.myCountries:
-            print(self.myCountries[country])
+        for country in self.countryCat:
+            print(self.countryCat[country])
 
     # Method to save the Catalogue to a file
     def saveCountryCatalogue(self, fname):
@@ -80,9 +80,9 @@ class CountryCatalogue:
 
         # Make a list (to sort the countries later) and add all the countries (formatted) to it
         outputList = []
-        for country in self.myCountries:
+        for country in self.countryCat:
             # Format for output
-            currentCountry = self.myCountries[country]
+            currentCountry = self.countryCat[country]
             tempString = currentCountry.getName() + '|' + currentCountry.getContinent() + '|' + currentCountry.getPopulation() + '|' + currentCountry.getArea()
             outputList.append(tempString)
             numItems += 1
