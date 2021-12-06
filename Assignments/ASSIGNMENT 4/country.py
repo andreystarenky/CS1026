@@ -8,6 +8,10 @@ class Country:
     def __init__(self, name, pop="", area="", continent=""):
         # Define the variables in an instance context
         self.countryName = name
+
+!!! THESE HAVE TO BE NAMED WITHOUT "country" - just name, population, area, continent. 
+you can do this.name = name, the first one is the instance variable, the second is a paramenter     
+
         self.countryPopulation = pop
         self.countryArea = area
         self.countryContinent = continent
@@ -44,4 +48,8 @@ class Country:
     def __eq__(self, other):
         if other!= None and self.countryName == other.getName():
             return True
+        
+!!! WE DISCUSSED THIS - you don't need this. And it is also wrong, as 2 country objects with the same name 
+and different other fields would be considered equal
+
         return False
