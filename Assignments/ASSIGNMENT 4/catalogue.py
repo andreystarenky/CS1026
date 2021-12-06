@@ -10,6 +10,9 @@ class CountryCatalogue:
     def __init__(self, countryFileName):
         # Create a dictionary to store the Country objects - dict easier to find by names later
         self.myCountries = {}
+
+!!! IT HAS TO BE NAMED countryCat
+
         # Get data from file
         countryFile = open(countryFileName, 'r', encoding="utf-8")
         countryFile.readline() # skip the first line as it is just a header
@@ -17,6 +20,9 @@ class CountryCatalogue:
             # Clean up string from mainly '\n' characters, and split it by the '|' character
             lineArray = line.strip().split('|')
 
+!!! So we are not doing any validation here that the line is not emppty, that we read exactly 4 values
+!!! It doesn't say that we should be doing validations, but I'm just checking (I think it's OK)
+                                                                               
             # Create a country object to add to list of countries
             newCountry = Country(lineArray[0],lineArray[2],lineArray[3],lineArray[1])
             self.myCountries[lineArray[0]] = newCountry
@@ -25,6 +31,9 @@ class CountryCatalogue:
     # Setter methods
     def setPopulationOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
+                                                                               
+!!! COPY THIS COMMENT TO THE OTHER SETTERS?                                    
+                                                                               
         if countryName in self.myCountries:
             self.myCountries[countryName].setPopulation(newValue)
         else:
@@ -53,6 +62,12 @@ class CountryCatalogue:
         tempCountry = Country(countryName, pop, area, cont)
         # Check if country already exists
         if self.findCountry(tempCountry) == None:
+
+!!! YOU ARE NOT USING findCountry in setters, but you use directly "if countryName in self.myCountries" so why use it here?
+!!! DO THE SAME: if not countryName in self.myCountries:
+!!!                 self.myCountries[countryName] = Country(countryName, pop, area, cont)
+!!! DO not need tempCountry at all
+                                                                               
             # Country is not in our Catalogue yet
             self.myCountries[countryName] = tempCountry
             return True
