@@ -9,43 +9,38 @@ class CountryCatalogue:
     # Constructor with default values
     def __init__(self, countryFileName):
         # Create a dictionary to store the Country objects - dict easier to find by names later
-        self.myCountries = {}
-
-!!! IT HAS TO BE NAMED countryCat
+        self.countryCat = {}
 
         # Get data from file
         countryFile = open(countryFileName, 'r', encoding="utf-8")
         countryFile.readline() # skip the first line as it is just a header
         for line in countryFile:
             # Clean up string from mainly '\n' characters, and split it by the '|' character
-            lineArray = line.strip().split('|')
-
-!!! So we are not doing any validation here that the line is not emppty, that we read exactly 4 values
-!!! It doesn't say that we should be doing validations, but I'm just checking (I think it's OK)
+            if not line == "":  # Check that the line is not empty - no point in counting it
+                lineArray = line.strip().split('|')
                                                                                
-            # Create a country object to add to list of countries
-            newCountry = Country(lineArray[0],lineArray[2],lineArray[3],lineArray[1])
-            self.myCountries[lineArray[0]] = newCountry
+                # Create a country object to add to list of countries
+                newCountry = Country(lineArray[0],lineArray[2],lineArray[3],lineArray[1])
+                self.myCountries[lineArray[0]] = newCountry
 
 
     # Setter methods
     def setPopulationOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
-                                                                               
-!!! COPY THIS COMMENT TO THE OTHER SETTERS?                                    
-                                                                               
         if countryName in self.myCountries:
             self.myCountries[countryName].setPopulation(newValue)
         else:
             print("Error - country DNE: " + countryName)
 
     def setAreaOfCountry(self, countryName, newValue):
+        # Check if country exists - should not get to this point if DNE because it should check prior to this
         if countryName in self.myCountries:
             self.myCountries[countryName].setArea(newValue)
         else:
             print("Error - country DNE: " + countryName)
 
     def setContinentOfCountry(self, countryName, newValue):
+        # Check if country exists - should not get to this point if DNE because it should check prior to this
         if countryName in self.myCountries:
             self.myCountries[countryName].setContinent(newValue)
         else:
