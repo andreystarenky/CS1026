@@ -51,8 +51,6 @@ myCat.saveCountryCatalogue("output.txt")
 #print(myCat.saveCountryCatalogue("output.txt"))
 '''
 
-
-
 BAD_UPDATE_FILE = "badupdates.txt"
 cntryFileName = input("Enter name of file with country data: ")
 updateFileName = input("Enter name of file with country updates: ")

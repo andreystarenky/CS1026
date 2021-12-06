@@ -3,6 +3,7 @@
 # This module has the processUpdates function which will take care of checking the files and handling updates
 
 from catalogue import CountryCatalogue
+from country import Country
 
 def processUpdates(cntryFileName, updateFileName, badUpdateFile):
     # Create catlog variable
@@ -69,16 +70,32 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             print("!!!!!!!!!!!!!!!!!!!Invalid update: " + update)
             invalidUpdates.append(update)
 
+    # Add bad updates to file
+    try:
+        writeFile = open(badUpdateFile, 'w',  encoding="utf-8")
+        for item in invalidUpdates:
+            writeFile.write(item + "\n")
+        writeFile.close()
+    except Exception as e:
+        print("Error opening file for writing: " + str(e))
+
+    # Print the new updated list of countries to "output.txt"
+    catlog.saveCountryCatalogue("output.txt")
+
+    return True, catlog
+
 
 def handleUpdate(update, catlog):
     if update == "":  # Empty update
         print("empty update")
         return False
-    updateArray = update.split(';')  # Remove spaces, and split using ; character
-    if len(updateArray) == 1:  # Only country, no updates
-        print("only country no udpate")
+    if update.count(';') > 3:  # Too many semicolons
         return False
+    updateArray = update.split(';')  # Remove spaces, and split using ; character
     countryName = updateArray[0]
+    if len(countryName) == 0:  # Country field is empty
+        print("country is empty")
+        return False
     if countryName[0].islower():  # If first character is not uppercase
         print("first char is lower")
         return False
@@ -86,13 +103,100 @@ def handleUpdate(update, catlog):
         if (char.lower() < 'a' or char.lower() > 'z') and char != '_':
             print("country char out of bounds")
             return False
-    return True
-    #   COMMAS IN GROUPS OF 3
+
+    # At this point, the country name is valid - we can now proceed to check for what updates to make
+
+    if len(updateArray) == 1:  # Only country name, with no updates
+        # ADD COUNTRY WITH NO DATA - the addCountry function already checks if it exists so no need to do that here
+        catlog.addCountry(countryName)
+        return True  # No need to continue here, if only the country name is given this is the only update to make
+
+    # Counters for each type of update
+    numP, numA, numC = 0, 0, 0
+    # ! ! ! Important ! ! !
+    # We must loop through the array once ONLY to check for problems and NOT to make any updates
+    # This is because if there is a single error, the entire update should be ignored
+    # This is to prevent finding an error on the last field once all the other updates have been applied
+    for item in updateArray:
+        if item != countryName:  # Make sure we are not dealing with the country name, the first index
+            if len(item) > 2:  # Make sure the update is not blank or just 2 chars (also invalid)
+                # We are assuming that for every X= there will be a value following it, otherwise it is ignored
+                if item[1] == '=':  # Make sure there is an equals sign
+                    valueString = item[2:]  # This is the string with the actual value to update with
+                    if item[0] == 'P' and numP == 0:  # Check if it is P and if there have been no P updates yet
+                        numP +=1
+                        if not validateNumber(valueString):  # Check if the population is value (commas)
+                            print("invalid pop")
+                            return False
+                    elif item[0] == 'A' and numA == 0:
+                        numA +=1
+                        if not validateNumber(valueString):  # Check if the area is value (commas)
+                            print("invalid area")
+                            return False
+                    elif item[0] == 'C' and numC==0:
+                        numC +=1
+                        if not validateContinent(valueString):
+                            print("invalid continent")
+                            return False
+                    else:               # Not a valid update field character, or an update field has been given more than once
+                        print("invalid field char or given more than once")
+                        return False
+                else:
+                    return False  # No equals sign
+            elif len(item) > 0:
+                print("1 char or no val")
+                return False  # Invalid field (only 1 character OR no field value (such as "P=")
+            # Else ignore, no need to handle empty field
+
+    # If this point is reached, the update should be determined to be VALID
+    # Time to process the update!
+    # No more need to catch invalid update, just check if there is an update field
+
+    searchCountry = Country(countryName)
+
+    # CHECK IF NEED TO ADD COUNTRY
+    if catlog.findCountry(searchCountry) == None:
+        # Country does not exist, first add it to the catlog
+        catlog.addCountry(countryName)  # We only need to add the name, the rest of the values will be added below
+
+    for item in updateArray:
+        if item != countryName:  # Make sure we are not dealing with the country name, the first index
+            if len(item) > 2:  # Make sure the update is not blank - if it is, it is skipped
+                    valueString = item[2:]  # This is the string with the actual value to update with
+                    if item[0] == 'P':  # Process P update
+                        catlog.findCountry(searchCountry).setPopulation(valueString)
+
+                    elif item[0] == 'A':
+                        catlog.findCountry(searchCountry).setArea(valueString)
+
+                    elif item[0] == 'C':
+                        catlog.findCountry(searchCountry).setContinent(valueString)
+
+                    # Should not be any other case, but end with elif just in case to catch potential bad updates
 
     return True
 
+# Validate population and area values
 def validateNumber(value):
-    return False
+    reversedValue = value[::-1]  # Reverse the string
+    for i in range(0, len(reversedValue)):  # Iterate through string backwards
+        if (i + 1) % 4 == 0:  # Check if in position where comma should be
+            if reversedValue[i] != ',':  # Check for comma where it should be
+                return False
+        elif reversedValue[i] == ',':  # Check for comma where it should not be
+                return False
+
+        #elif not value[i].isdigit():  # Return false if a character is not a digit
+            #return False
+    return True
+
+# Validate continent values
+def validateContinent(value):
+    continents = ['Africa', 'Antarctica', 'Arctic', 'Asia', 'Europe', 'North_America', 'South_America']
+    if value not in continents:
+        return False
+    else:
+        return True
 
 def outputUnsuccessfulUpdate():
     try:

@@ -49,7 +49,7 @@ class CountryCatalogue:
         return None
 
     # Add country method
-    def addCountry(self, countryName, pop, area, cont):
+    def addCountry(self, countryName, pop="", area="", cont=""):  # Parameters with default values of ""
         tempCountry = Country(countryName, pop, area, cont)
         # Check if country already exists
         if self.findCountry(tempCountry) == None:
@@ -77,10 +77,8 @@ class CountryCatalogue:
             outputList.append(tempString)
             numItems += 1
 
-        print(outputList)
         # Sort the list
         outputList.sort()
-        print(outputList)
 
         try:
             outputFile = open(fname, 'w', encoding="utf-8")

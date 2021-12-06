@@ -1,0 +1,21 @@
+Brazil;P=193,364,111;A=8,511,966
+Indonesia;P=260,581,345
+Italy; P=59 ,801,999
+Japan;P=127,380,555;A=377,800
+Sweden;P=9,995,345;A=450,295;C=Europe
+Vietnam;A=331,310;P=95,541,921;C=Asia
+Mexico;P=128,632,777
+Colombia;A=1,091,111;P=48,654,404
+Egypt;P=93,384,001
+France;P=64,669,829
+
+Canada;P=37,591,023
+Germany;A=213,000;P=83,022,544
+Germany ; A=213 , 000 ; P=83, 022, 544
+Vietnam;P=94,469,067
+Mexico
+Mexico;
+France;;A=213,000;P = 67,067,112
+France; A=213,000 ; P = 67,067,112 ; C=Europe
+United_States_of_America;P=328,566,312
+United_states_of_america;P=328,566,312
