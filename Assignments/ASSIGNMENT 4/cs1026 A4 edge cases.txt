@@ -1,0 +1,20 @@
+cs1026 A4 edge cases
+
+
+  empty update
+  too many semicolons
+  country field is empty
+  first char of cont is lower
+  unallowed chars in cont
+**only country no updates (check if actually added)
+  
+  invalid update char
+**no update value (just P or P=) (double check if should add empty val for P=)
+  no equals sign
+
+  commas where there shouldn't be
+  no commas where there should be
+
+country does not currently exist
+ - with all values
+ - with some

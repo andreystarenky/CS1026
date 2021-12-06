@@ -1,0 +1,62 @@
+questions re cs1026 a4 
+
+will country or continent names ever be given without _ in updates? should we use? no cause you use that method urself?
+
+* when using the findCountry method to see if object exists, let's say I check if the object in the parameter exists in my dictionary - if I chose to override __eq__ within country, should I check that just the name is the same, or that all the values are the same? in other words what do you mean by "check if that object is in countryCat", same country or same country + values?
+
+does this mean all the values of the country must match? or can it just be the name of the country? even if comparison is made (overriding the __eq__ operator)
+
+in function saveCountryCatalogue(self,fname) it describes to return -1 if the operation is "unsuccessful", how would this occur? If the file cannot be opened for writing?
+
+in same function, it says it must be "sorted alphabetically by name (A – Z) prior to saving" does this take into account different (upper/lower)cases? should we assume that lowercase countries can be entered and account for that or can we use .sort on a list and assume there are no lowercase countries? 
+ - SOLVED --> countries must start with a capital letter :D
+
+??? do we include headers or no?
+
+
+
+_________NEW_________
+
+do we need to check if the value is the same before checking? no right?
+
+if an update is proccessed with a country just with the name but it already exists, do we just process and move on? or do we count it as invalid - just process and move on right?
+
+do we have to check that the num is actually digits? no right?
+
+is ,300,000 a valid number?
+
+
+how to handle ;P=; ? (no actual update value) - currently it ignores, only uses if there are more than 2 char
+
+are update files going to have headers??
+
+should bad updates file have headers??
+
+annoyance - why catalogue need to accept object as find parameter? makes annoying in
+if catlog.findCountry(Country(countryName)) == None:
+AND the 3 set functions after it
+wtf?
+
+
+
+couple things:
+
+do we need to check if the update value is the same as the existing before checking? no point in doing this right?
+
+if an update is processed with a country just with the name but it already exists, do we just process and move on? like we wouldn't clear any of the values nor count this as invalid or anything else - nothing changes - correct?
+
+do we have to check that the num is actually digits? it does technically say it must be in digits, just says that in data.txt we will receive as digits. For now I just checked that there are no commas in places where there should be digits
+
+is ,300,000 a valid number for area/pop?
+
+
+how to handle ;P=; ? (no actual update value) - currently i do so it ignores, only uses if there are more than 2 char - only other thing I see being done is just effectively erasing the current value (putting "")
+
+are update files going to have headers?? I think not but this is a q for the prof I guess
+
+also should my bad updates file have headers?
+
+annoyance - why does catalogue need to accept object as findCountry parameter? makes it annoying in
+if catlog.findCountry(Country(countryName)) == None:
+AND the 3 set functions after it when actually updating the value
+wtf?
