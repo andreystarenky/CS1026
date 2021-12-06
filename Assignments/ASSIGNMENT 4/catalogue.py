@@ -12,6 +12,7 @@ class CountryCatalogue:
         self.myCountries = {}
         # Get data from file
         countryFile = open(countryFileName, 'r', encoding="utf-8")
+        countryFile.readline() # skip the first line as it is just a header
         for line in countryFile:
             # Clean up string from mainly '\n' characters, and split it by the '|' character
             lineArray = line.strip().split('|')
@@ -43,8 +44,8 @@ class CountryCatalogue:
 
     # Find country method
     def findCountry(self, countryObject):
-        if countryObject in self.myCountries.values():
-            return countryObject
+        if countryObject.getName() in self.myCountries:
+            return self.myCountries[countryObject.getName()]
         return None
 
     # Add country method
@@ -81,13 +82,14 @@ class CountryCatalogue:
         outputList.sort()
         print(outputList)
 
-        outputFile = open(fname,'w')
-        for line in outputList:
-            outputFile.write(line + '\n')
-        outputFile.close()
-
-        return numItems
-
-    # Method to format a country for file output
-    def formatCountryString(self, countryObject):
-        return countryObject.getName() + '|' + countryObject.getContinent() + '|' + countryObject.getPopulation() + '|' + countryObject.getArea()
+        try:
+            outputFile = open(fname, 'w', encoding="utf-8")
+            outputFile.write("Country|Continent|Population|Area\n") # Write a header to the output file
+            for line in outputList:
+                outputFile.write(line + '\n')
+            outputFile.close()
+        except Exception as e:
+            print("Error opening file for writing: " + str(e))
+            numItems = -1
+        finally:
+            return numItems

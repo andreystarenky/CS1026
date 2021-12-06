@@ -1,8 +1,8 @@
+Country|Continent|Population|Area
 Brazil|South_America|193,364,000|8,511,965
 Canada|North_America|34,207,000|9,976,140
 China|Asia|1,339,190,000|9,596,960
 Colombia|South_America|48,654,392|1,090,909
-Country|Continent|Population|Area
 Egypt|Africa|93,383,574|1,000,000
 Fake_country|Asia|123|456
 France|Europe|64,668,129|541,656

@@ -44,7 +44,14 @@ print()
 print("############### FINAL OUTPUT ###############")
 #myCat.printCountryCatalogue()
 myCat.saveCountryCatalogue("output.txt")
+
+
+
+#myCat = CountryCatalogue('data.txt')
+#print(myCat.saveCountryCatalogue("output.txt"))
 '''
+
+
 
 BAD_UPDATE_FILE = "badupdates.txt"
 cntryFileName = input("Enter name of file with country data: ")
