@@ -8,6 +8,8 @@ from country import Country
 def processUpdates(cntryFileName, updateFileName, badUpdateFile):
     # Create catlog variable
     catlog = None
+    
+!!!! Why catlog and not catalog?    
 
     # This is a looping variable - if file is found, it will be set to true otherwise it will loop until
     # a valid file name is given
@@ -30,6 +32,11 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             if input("Would you like to quit? (Y/N) ").lower() == 'n': # If user enters N or n, continue
                 # Not quitting, prompt for new file name
                 cntryFileName = input("Enter the new countries file name: ")
+                
+!!! It's a really bad prctice to use a paramenter as a variable (assigning to it)
+!!! Normally you'd create a new variable first thing inside this function like fileName = cntryFileName, and then use this one
+!!! Same for the updateFile
+                
             else:
                 # Write to output file
                 outputUnsuccessfulUpdate()
@@ -45,6 +52,9 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             # Add the updates to the list of updates
             for line in updatesFile:
                 listOfUpdates.append(line.strip().replace(' ','')) # Remove spaces, clean up string
+                
+!!! DO YOU HAVE TO CHECK IF THE LINE IS EMPTY AND SKIP IT?                
+                
             updatesFile.close()  # Close file
             print("Updates file successfully processed . . .")
             valid = True
@@ -68,6 +78,9 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             print("Processed update: " + update)
         else:
             print("!!!!!!!!!!!!!!!!!!!Invalid update: " + update)
+            
+!!!! do you need to remove this !!!!!!! print thing?            
+            
             invalidUpdates.append(update)
 
     # Add bad updates to file
@@ -88,10 +101,19 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
 def handleUpdate(update, catlog):
     if update == "":  # Empty update
         print("empty update")
+        
+!!! Instructions say that "If there is a blank line in the file, it should be skipped. " - so completely blank update is not invalid
+!!! maybe you can just skip even creating an update for it when reading a file if the line is blank
+        
         return False
     if update.count(';') > 3:  # Too many semicolons
         return False
     updateArray = update.split(';')  # Remove spaces, and split using ; character
+    
+!!! HOW DOES THIS REMOVE SPACES? Espcically spaces NOT around ; like inside the country name or in the numbers?    
+    
+!!! Suggestion: extract these into separate function like parseName(updateArray) that returns (True, Name) or (False, None)
+    
     countryName = updateArray[0]
     if len(countryName) == 0:  # Country field is empty
         print("country is empty")
@@ -104,6 +126,9 @@ def handleUpdate(update, catlog):
             print("country char out of bounds")
             return False
 
+!!! This doesn't look like it will work for the countries with the spaces in them like United_ States _ of_America
+!!! this is valid (after the spaces are removed), but won't pass your validation.
+        
     # At this point, the country name is valid - we can now proceed to check for what updates to make
 
     if len(updateArray) == 1:  # Only country name, with no updates
@@ -119,6 +144,10 @@ def handleUpdate(update, catlog):
     # This is to prevent finding an error on the last field once all the other updates have been applied
     for item in updateArray:
         if item != countryName:  # Make sure we are not dealing with the country name, the first index
+            
+!!! You should be doing index loop from 1.
+!!! What if I have an update record: France;France;France ? - all elements are the same and you'd happily skip them
+            
             if len(item) > 2:  # Make sure the update is not blank or just 2 chars (also invalid)
                 # We are assuming that for every X= there will be a value following it, otherwise it is ignored
                 if item[1] == '=':  # Make sure there is an equals sign
@@ -160,6 +189,15 @@ def handleUpdate(update, catlog):
         catlog.addCountry(countryName)  # We only need to add the name, the rest of the values will be added below
 
     for item in updateArray:
+        
+!!! YOU don't need a second loop. You can just start building these updates in the first one:
+!!! pUpdate= ""
+!!! aUpdate = ""
+!!! cUpdate = ""
+!!! AND INSTEAD of the counters you just check if these are empty inside the loop, like instead of checking numP == 0 you check len(pUpdate) == 0
+!!! and then instead of numP += 1 you do if validateNumber() : pUpdate = <value>
+!!! much simpler and elegant
+        
         if item != countryName:  # Make sure we are not dealing with the country name, the first index
             if len(item) > 2:  # Make sure the update is not blank - if it is, it is skipped
                     valueString = item[2:]  # This is the string with the actual value to update with
@@ -183,7 +221,13 @@ def validateNumber(value):
         if (i + 1) % 4 == 0:  # Check if in position where comma should be
             if reversedValue[i] != ',':  # Check for comma where it should be
                 return False
+            
+!!! CHECK THAT THE NUMBER DOESN'T START WITH A COMMA            
+            
         elif reversedValue[i] == ',':  # Check for comma where it should not be
+            
+!!! THIS SHOULD CHECK FOR A VALID DIGIT INSTEAD            
+            
                 return False
 
         #elif not value[i].isdigit():  # Return false if a character is not a digit
