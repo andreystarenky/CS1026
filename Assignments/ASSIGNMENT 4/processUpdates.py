@@ -65,7 +65,7 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             # Ask for quit
             if input("Would you like to quit? (Y/N) ").lower() == 'n':  # If user enters N or n, continue
                 # Not quitting, prompt for new file name
-                updateFileName = input("Enter the new updates file name: ")
+                tempFileName = input("Enter the new updates file name: ")
             else:
                 # Write to output file
                 outputUnsuccessfulUpdate()
