@@ -1,10 +1,11 @@
 # Andrey Starenky, astarenk, 251214306
-# December 4, 2021
+# December 6, 2021
 # This file contains the CountryCatalogue class which holds the info for all the countries
 # It can also find and add countries and save the catalogue of the countries
 
 from country import Country
 
+# CountryCatalogue Class
 class CountryCatalogue:
 
     # Constructor with default values

@@ -1,1 +1,4 @@
-France;P=64,669,829;asia
+;P=260,581,345
+Italy;X=59,801,999
+Canada;C=North_america
+EgyptA=1,000,000;P=93,384,001

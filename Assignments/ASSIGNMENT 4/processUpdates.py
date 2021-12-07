@@ -1,6 +1,7 @@
 # Andrey Starenky, astarenk, 251214306
-# December 4, 2021
+# December 6, 2021
 # This module has the processUpdates function which will take care of checking the files and handling updates
+# It will also use various helper functions
 
 from catalogue import CountryCatalogue
 from country import Country
