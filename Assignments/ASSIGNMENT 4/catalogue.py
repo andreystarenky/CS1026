@@ -54,17 +54,10 @@ class CountryCatalogue:
 
     # Add country method
     def addCountry(self, countryName, pop="", area="", cont=""):  # Parameters with default values of ""
-        tempCountry = Country(countryName, pop, area, cont)
         # Check if country already exists
-        if self.findCountry(tempCountry) == None:
-
-            #!!! YOU ARE NOT USING findCountry in setters, but you use directly "if countryName in self.myCountries" so why use it here?
-            #!!! DO THE SAME: if not countryName in self.myCountries:
-            #!!!                 self.myCountries[countryName] = Country(countryName, pop, area, cont)
-            #!!! DO not need tempCountry at all
-                                                                               
+        if not countryName in self.countryCat:
             # Country is not in our Catalogue yet
-            self.countryCat[countryName] = tempCountry
+            self.countryCat[countryName] = Country(countryName, pop, area, cont)
             return True
         return False
 
