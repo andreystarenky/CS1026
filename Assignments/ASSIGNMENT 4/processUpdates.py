@@ -108,7 +108,7 @@ def handleUpdate(update, catlog):
         catlog.addCountry(countryName)
         return True  # No need to continue here, if only the country name is given this is the only update to make
 
-    # Counters for each type of update
+    # Update strings for each type of update
     pUpdate, aUpdate, cUpdate = "", "", ""
     # ! ! ! Important ! ! !
     # We must loop through the array once ONLY to check for problems and NOT to make any updates
@@ -123,11 +123,11 @@ def handleUpdate(update, catlog):
                     if not validateNumber(valueString):  # Check if the population is value (commas)
                         return False
                     pUpdate = valueString
-                elif item[0] == 'A' and aUpdate == "":
+                elif item[0] == 'A' and aUpdate == "":  # Check if it is A and if there have been no A updates yet
                     if not validateNumber(valueString):  # Check if the area is value (commas)
                         return False
                     aUpdate = valueString
-                elif item[0] == 'C' and cUpdate == "":
+                elif item[0] == 'C' and cUpdate == "":  # Check if it is C and if there have been no C updates yet
                     if not validateContinent(valueString):
                         return False
                     cUpdate = valueString
@@ -150,12 +150,16 @@ def handleUpdate(update, catlog):
         # Country does not exist, first add it to the catlog
         catlog.addCountry(countryName)  # We only need to add the name, the rest of the values will be added below
 
+    # Create the updates
+    # Population update
     if pUpdate != "":  # If not empty
         catlog.findCountry(searchCountry).setPopulation(valueString)
 
+    # Area update
     if aUpdate != "":  # If not empty
         catlog.findCountry(searchCountry).setArea(valueString)
 
+    # Continent update
     if cUpdate != "":  # If not empty
         catlog.findCountry(searchCountry).setContinent(valueString)
 
