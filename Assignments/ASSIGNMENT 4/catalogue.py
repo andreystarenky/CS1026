@@ -6,6 +6,7 @@
 from country import Country
 
 class CountryCatalogue:
+
     # Constructor with default values
     def __init__(self, countryFileName):
         # Create a dictionary to store the Country objects - dict easier to find by names later
@@ -23,8 +24,8 @@ class CountryCatalogue:
                 newCountry = Country(lineArray[0],lineArray[2],lineArray[3],lineArray[1])
                 self.countryCat[lineArray[0]] = newCountry
 
-
     # Setter methods
+    # Set population
     def setPopulationOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
         if countryName in self.countryCat:
@@ -32,6 +33,7 @@ class CountryCatalogue:
         else:
             print("Error - country DNE: " + countryName)
 
+    # Set area
     def setAreaOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
         if countryName in self.countryCat:
@@ -39,6 +41,7 @@ class CountryCatalogue:
         else:
             print("Error - country DNE: " + countryName)
 
+    # Set Continent
     def setContinentOfCountry(self, countryName, newValue):
         # Check if country exists - should not get to this point if DNE because it should check prior to this
         if countryName in self.countryCat:
@@ -83,12 +86,13 @@ class CountryCatalogue:
         # Sort the list
         outputList.sort()
 
+        # Print the output to the output file
         try:
             outputFile = open(fname, 'w', encoding="utf-8")
             outputFile.write("Country|Continent|Population|Area\n") # Write a header to the output file
             for line in outputList:
-                outputFile.write(line + '\n')
-            outputFile.close()
+                outputFile.write(line + '\n')  # Write each line to the file
+            outputFile.close()  # Close the file
         except Exception as e:
             print("Error opening file for writing: " + str(e))
             numItems = -1

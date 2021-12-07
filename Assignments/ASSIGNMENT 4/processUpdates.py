@@ -5,6 +5,9 @@
 from catalogue import CountryCatalogue
 from country import Country
 
+# Global Constant so it does not need to be recreated each time the validateContinent() function is called
+CONTINENTS = ['Africa', 'Antarctica', 'Arctic', 'Asia', 'Europe', 'North_America', 'South_America']
+
 def processUpdates(cntryFileName, updateFileName, badUpdateFile):
     # Create catlog variable
     catlog = None
@@ -70,11 +73,7 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
     # handle all updates, and add to invalid updates list if the update is invalid
     invalidUpdates = []
     for update in listOfUpdates:
-        if handleUpdate(update, catlog):
-            print("Processed update: " + update)
-        else:
-            print("!!!!!!!!!!!!!!!!!!!Invalid update: " + update)
-
+        if not handleUpdate(update, catlog):
             invalidUpdates.append(update)
 
     # Add bad updates to file
@@ -101,7 +100,7 @@ def handleUpdate(update, catlog):
     if not validateCountry(countryName):
         return False
 
-    # At this point, the country name is valid - we can now proceed to check for what updates to make
+    # At this point, the country name is valid - we can now proceed to check if the updates are valid
 
     if len(updateArray) == 1:  # Only country name, with no updates
         # ADD COUNTRY WITH NO DATA - the addCountry function already checks if it exists so no need to do that here
@@ -157,16 +156,13 @@ def handleUpdate(update, catlog):
                 valueString = item[2:]  # This is the string with the actual value to update with
                 if item[0] == 'P':  # Process P update
                     catlog.findCountry(searchCountry).setPopulation(valueString)
-
                 elif item[0] == 'A':
                     catlog.findCountry(searchCountry).setArea(valueString)
-
                 elif item[0] == 'C':
                     catlog.findCountry(searchCountry).setContinent(valueString)
-
                 # Should not be any other case, but end with elif just in case to catch potential bad updates
-
     return True
+
 
 def validateCountry(countryName):
     if len(countryName) == 0:  # Country field is empty
@@ -178,8 +174,11 @@ def validateCountry(countryName):
             return False
     return True
 
+
 # Validate population and area values
 def validateNumber(value):
+    if value[0] == ",":  # Checks if first character is a ',' such as ,300 which is invalid
+        return False
     reversedValue = value[::-1]  # Reverse the string
     for i in range(0, len(reversedValue)):  # Iterate through string backwards
         if (i + 1) % 4 == 0:  # Check if in position where comma should be
@@ -189,14 +188,13 @@ def validateNumber(value):
             return False
     return True
 
+
 # Validate continent values
 def validateContinent(value):
-    continents = ['Africa', 'Antarctica', 'Arctic', 'Asia', 'Europe', 'North_America', 'South_America']
-    if value not in continents:
-        return False
-    else:
-        return True
+    return value in CONTINENTS
 
+
+# Outputs unsuccessful to file
 def outputUnsuccessfulUpdate():
     try:
         myFile = open("output.txt", 'w', encoding="utf-8")
