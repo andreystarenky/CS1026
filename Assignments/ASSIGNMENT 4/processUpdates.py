@@ -49,7 +49,7 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             updatesFile = open(tempFileName, 'r', encoding="utf-8")
             # Add the updates to the list of updates
             for line in updatesFile:
-                if line.replace(' ', '') != "":  # Check that line is not empty
+                if line.strip() != "":  # Check that line is not empty
                     listOfUpdates.append(line.strip().replace(' ','')) # Remove spaces, clean up string
                 
             updatesFile.close()  # Close file
@@ -66,7 +66,6 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
                 # Write to output file
                 outputUnsuccessfulUpdate()
                 return False, None
-    #print(listOfUpdates)
 
     # handle all updates, and add to invalid updates list if the update is invalid
     invalidUpdates = []
@@ -75,7 +74,7 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
             print("Processed update: " + update)
         else:
             print("!!!!!!!!!!!!!!!!!!!Invalid update: " + update)
-            
+
             invalidUpdates.append(update)
 
     # Add bad updates to file
@@ -123,31 +122,28 @@ def handleUpdate(update, catlog):
                 if item[0] == 'P' and numP == 0:  # Check if it is P and if there have been no P updates yet
                     numP +=1
                     if not validateNumber(valueString):  # Check if the population is value (commas)
-                        print("invalid pop")
                         return False
                 elif item[0] == 'A' and numA == 0:
                     numA +=1
                     if not validateNumber(valueString):  # Check if the area is value (commas)
-                        print("invalid area")
                         return False
                 elif item[0] == 'C' and numC==0:
                     numC +=1
                     if not validateContinent(valueString):
-                        print("invalid continent")
                         return False
-                else:               # Not a valid update field character, or an update field has been given more than once
-                    print("invalid field char or given more than once")
+                else:  # Not a valid update field character, or an update field has been given more than once
                     return False
             else:
                 return False  # No equals sign
         elif len(item) > 0:
-            print("1 char or no val")
             return False  # Invalid field (only 1 character OR no field value (such as "P=")
         # Else ignore, no need to handle empty field
 
     # If this point is reached, the update should be determined to be VALID
     # Time to process the update!
     # No more need to catch invalid update, just check if there is an update field
+
+    # This was separated into a separate loop to be easier to read, so the program is more structured
 
     searchCountry = Country(countryName)
 
@@ -166,7 +162,6 @@ def handleUpdate(update, catlog):
         !!! and then instead of numP += 1 you do if validateNumber() : pUpdate = <value>
         !!! much simpler and elegant
         '''
-        print(item)
         if len(item) > 2:  # Make sure the update is not blank - if it is, it is skipped
                 valueString = item[2:]  # This is the string with the actual value to update with
                 if item[0] == 'P':  # Process P update
@@ -184,14 +179,11 @@ def handleUpdate(update, catlog):
 
 def validateCountry(countryName):
     if len(countryName) == 0:  # Country field is empty
-        print("country is empty")
         return False
     if countryName[0].islower():  # If first character is not uppercase
-        print("first char is lower")
         return False
     for char in countryName:  # Check if each character in the word is allowed
         if (char.lower() < 'a' or char.lower() > 'z') and char != '_':
-            print("country char out of bounds")
             return False
     return True
 
