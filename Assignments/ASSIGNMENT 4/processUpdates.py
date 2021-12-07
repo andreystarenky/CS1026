@@ -9,6 +9,7 @@ from country import Country
 # Global Constant so it does not need to be recreated each time the validateContinent() function is called
 CONTINENTS = ['Africa', 'Antarctica', 'Arctic', 'Asia', 'Europe', 'North_America', 'South_America']
 
+# Main function to process updates
 def processUpdates(cntryFileName, updateFileName, badUpdateFile):
     # Create catlog variable
     catlog = None
@@ -92,6 +93,7 @@ def processUpdates(cntryFileName, updateFileName, badUpdateFile):
     return True, catlog
 
 
+# Handle each individual update
 def handleUpdate(update, catlog):
     if update.count(';') > 3:  # Too many semicolons
         return False
@@ -166,6 +168,7 @@ def handleUpdate(update, catlog):
     return True
 
 
+# Validate the country name
 def validateCountry(countryName):
     if len(countryName) == 0:  # Country field is empty
         return False
