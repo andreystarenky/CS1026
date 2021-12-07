@@ -155,15 +155,15 @@ def handleUpdate(update, catlog):
     # Create the updates
     # Population update
     if pUpdate != "":  # If not empty
-        catlog.findCountry(searchCountry).setPopulation(valueString)
+        catlog.findCountry(searchCountry).setPopulation(pUpdate)
 
     # Area update
     if aUpdate != "":  # If not empty
-        catlog.findCountry(searchCountry).setArea(valueString)
+        catlog.findCountry(searchCountry).setArea(aUpdate)
 
     # Continent update
     if cUpdate != "":  # If not empty
-        catlog.findCountry(searchCountry).setContinent(valueString)
+        catlog.findCountry(searchCountry).setContinent(cUpdate)
 
     return True
 
