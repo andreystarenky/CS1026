@@ -153,15 +153,6 @@ def handleUpdate(update, catlog):
         catlog.addCountry(countryName)  # We only need to add the name, the rest of the values will be added below
 
     for item in updateArray[1:]: # No need to process the country
-        '''
-        !!! YOU don't need a second loop. You can just start building these updates in the first one:
-        !!! pUpdate= ""
-        !!! aUpdate = ""
-        !!! cUpdate = ""
-        !!! AND INSTEAD of the counters you just check if these are empty inside the loop, like instead of checking numP == 0 you check len(pUpdate) == 0
-        !!! and then instead of numP += 1 you do if validateNumber() : pUpdate = <value>
-        !!! much simpler and elegant
-        '''
         if len(item) > 2:  # Make sure the update is not blank - if it is, it is skipped
                 valueString = item[2:]  # This is the string with the actual value to update with
                 if item[0] == 'P':  # Process P update
