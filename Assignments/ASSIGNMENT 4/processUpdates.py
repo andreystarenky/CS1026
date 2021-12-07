@@ -109,7 +109,7 @@ def handleUpdate(update, catlog):
         return True  # No need to continue here, if only the country name is given this is the only update to make
 
     # Counters for each type of update
-    numP, numA, numC = 0, 0, 0
+    pUpdate, aUpdate, cUpdate = "", "", ""
     # ! ! ! Important ! ! !
     # We must loop through the array once ONLY to check for problems and NOT to make any updates
     # This is because if there is a single error, the entire update should be ignored
@@ -119,18 +119,18 @@ def handleUpdate(update, catlog):
             # We are assuming that for every X= there will be a value following it, otherwise it is ignored
             if item[1] == '=':  # Make sure there is an equals sign
                 valueString = item[2:]  # This is the string with the actual value to update with
-                if item[0] == 'P' and numP == 0:  # Check if it is P and if there have been no P updates yet
-                    numP +=1
+                if item[0] == 'P' and pUpdate == "":  # Check if it is P and if there have been no P updates yet
                     if not validateNumber(valueString):  # Check if the population is value (commas)
                         return False
-                elif item[0] == 'A' and numA == 0:
-                    numA +=1
+                    pUpdate = valueString
+                elif item[0] == 'A' and aUpdate == "":
                     if not validateNumber(valueString):  # Check if the area is value (commas)
                         return False
-                elif item[0] == 'C' and numC==0:
-                    numC +=1
+                    aUpdate = valueString
+                elif item[0] == 'C' and cUpdate == "":
                     if not validateContinent(valueString):
                         return False
+                    cUpdate = valueString
                 else:  # Not a valid update field character, or an update field has been given more than once
                     return False
             else:
@@ -141,9 +141,7 @@ def handleUpdate(update, catlog):
 
     # If this point is reached, the update should be determined to be VALID
     # Time to process the update!
-    # No more need to catch invalid update, just check if there is an update field
-
-    # This was separated into a separate loop to be easier to read, so the program is more structured
+    # No more need to catch invalid update, just perform the updates
 
     searchCountry = Country(countryName)
 
@@ -152,16 +150,15 @@ def handleUpdate(update, catlog):
         # Country does not exist, first add it to the catlog
         catlog.addCountry(countryName)  # We only need to add the name, the rest of the values will be added below
 
-    for item in updateArray[1:]: # No need to process the country
-        if len(item) > 2:  # Make sure the update is not blank - if it is, it is skipped
-                valueString = item[2:]  # This is the string with the actual value to update with
-                if item[0] == 'P':  # Process P update
-                    catlog.findCountry(searchCountry).setPopulation(valueString)
-                elif item[0] == 'A':
-                    catlog.findCountry(searchCountry).setArea(valueString)
-                elif item[0] == 'C':
-                    catlog.findCountry(searchCountry).setContinent(valueString)
-                # Should not be any other case, but end with elif just in case to catch potential bad updates
+    if pUpdate != "":  # If not empty
+        catlog.findCountry(searchCountry).setPopulation(valueString)
+
+    if aUpdate != "":  # If not empty
+        catlog.findCountry(searchCountry).setArea(valueString)
+
+    if cUpdate != "":  # If not empty
+        catlog.findCountry(searchCountry).setContinent(valueString)
+
     return True
 
 
