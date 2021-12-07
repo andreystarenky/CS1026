@@ -113,7 +113,7 @@ def handleUpdate(update, catlog):
     # Update strings for each type of update
     pUpdate, aUpdate, cUpdate = "", "", ""
     # ! ! ! Important ! ! !
-    # We must loop through the array once ONLY to check for problems and NOT to make any updates
+    # We must loop through the array once to check for problems and collect any updates but only apply them after the loop
     # This is because if there is a single error, the entire update should be ignored
     # This is to prevent finding an error on the last field once all the other updates have been applied
     for item in updateArray[1:]:  # Test the sub-array not including the country
