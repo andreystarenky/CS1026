@@ -7,5 +7,5 @@ Vietnam;A=331,310;P=95,541,921;C=Asia
 Mexico;P=128,632,777
 Colombia;A=1,091,111;P=48,654,404
 Egypt;P=93,384,001
-France;P=64,669,829;asia
+,Fra nce;P=64,669,829;C=Asia
 Bob; P=1,300
